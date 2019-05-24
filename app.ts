@@ -1,6 +1,3 @@
-/**
- * Dependencies
- */
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import {Request, Response} from "express";
@@ -29,11 +26,9 @@ class App {
     }
 
 }
-const app = new App().app;
 
 
 /**
- *
  * Routes
  */
 class Routes {
@@ -44,6 +39,14 @@ class Routes {
                 message: 'GET request successfulll!!!!'
             })
         })
+
+        app.route('/content/:contentType')
+        .get((req: Request, res: Response) => {
+            console.log(req.params.contentType)
+            res.status(200).send({
+                message: 'content'
+            })
+        })
     }
 }
 
@@ -52,7 +55,10 @@ class Routes {
  *
  * Server
  */
+const app = new App().app;
+
 const PORT = 3000;
+
 app.listen(PORT, () => {
     console.log('Express server listening on port ' + PORT);
 })
